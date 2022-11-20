@@ -1,0 +1,21 @@
+#+title: Serial Server and Client
+
+* Introduction
+These tools can be used to share a serial port that is connected to a device
+that logs data and accepts commands through this port.
+
+* Dependencies
+Both tools are written in Python and has been tested with Python 3.10. They also
+require the =pyserial= package which is available at [[https://pypi.org/project/pyserial/][pypi.org/project/serial]].
+
+* Serial client
+This tool is used to write commands to a device connected to a serial port. This
+can be more convenient than to connect to the device directly because you can
+use the history feature of your shell or the tool itself.
+
+* Serial server
+The serial server tool is used to continuously read from a serial port. By doing
+so it is easy to save this log for later analysis.
+This tool also opens a server TCP socket and waits for clients to connect.
+By installing this tool as a systemd service you can have this tool running
+always in the background.
