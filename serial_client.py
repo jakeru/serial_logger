@@ -105,6 +105,8 @@ def interactive(interface, timeout):
             wait_for_response(interface, timeout)
     except (EOFError, KeyboardInterrupt):
         pass
+    finally:
+        print("")
 
 
 def split_host_and_port(host_colon_port):
