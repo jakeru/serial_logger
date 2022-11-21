@@ -81,6 +81,11 @@ def wait_for_response(interface, timeout):
         print("Timeout before prompt was found. Perhaps increase timeout?")
 
 
+def read_available_input(interface):
+    while data := interface.read(1024, timeout=0.1):
+        sys.stdout.buffer.write(data)
+
+
 def interactive(interface, timeout):
     histfile = os.path.join(os.path.expanduser("~"), ".serial_client_history")
     try:
@@ -95,7 +100,7 @@ def interactive(interface, timeout):
     try:
         while True:
             cmd = input(PROMPT + " ")
-            interface.flush_input()
+            read_available_input(interface)
             interface.write((cmd + "\n").encode())
             wait_for_response(interface, timeout)
     except (EOFError, KeyboardInterrupt):
